@@ -43,11 +43,17 @@
                                 <label for="name">{{ __('voyager::generic.name') }}</label>
                                 <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('voyager::generic.name') }}"
                                        value="{{ old('name', $dataTypeContent->name ?? '') }}">
+                                       @if ($errors->has('name'))
+                                           <span class="help-block">{{ $errors->first('name') }}</span>
+                                       @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input type="text" value="{{$dataTypeContent->username}}"  class="form-control" placeholder="username" name="username" id="username" />
+                                @if ($errors->has('username'))
+                                    <span class="help-block">{{ $errors->first('username') }}</span>
+                                 @endif
                             </div>
 
                             <div class="form-check">
@@ -59,30 +65,36 @@
                                 <input {{$dataTypeContent->status == "INACTIVE" ? "checked" : ""}}
                                         value="INACTIVE" type="radio" class="form-check-input" id="inactive" name="status">
                                 <label for="inactive">Inactive</label>
+                                @if ($errors->has('status'))
+                                    <span class="help-block">{{ $errors->first('status') }}</span>
+                                @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="address">Address</label>
                                      <textarea name="address" id="address" name="address" class="form-control {{$errors->first('address') ? "is-invalid" : ""}}">
                                          {{old('address') ? old('address') : $dataTypeContent->address}}</textarea>
-                                     <div class="invalid-feedback">
-                                         {{$errors->first('address')}}
-                                     </div>
+                                         @if ($errors->has('address'))
+                                            <span class="help-block">{{ $errors->first('address') }}</span>
+                                         @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="phone">Phone number</label>
                                     <br>
                                     <input type="text" name="phone" class="form-control {{$errors->first('phone') ? "is-invalid" : ""}}" value="{{old('phone') ? old('phone') : $dataTypeContent->phone}}">
-                                    <div class="invalid-feedback">
-                                        {{$errors->first('phone')}}
-                                    </div>
+                                    @if ($errors->has('phone'))
+                                        <span class="help-block">{{ $errors->first('phone') }}</span>
+                                    @endif
                             </div>
 
                             <div class="form-group">
                                 <label for="email">{{ __('voyager::generic.email') }}</label>
                                 <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('voyager::generic.email') }}"
                                        value="{{ old('email', $dataTypeContent->email ?? '') }}">
+                                       @if ($errors->has('email'))
+                                            <span class="help-block">{{ $errors->first('email') }}</span>
+                                        @endif
                             </div>
 
                             <div class="form-group">
@@ -92,6 +104,9 @@
                                     <small>{{ __('voyager::profile.password_hint') }}</small>
                                 @endif
                                 <input type="password" class="form-control" id="password" name="password" value="" autocomplete="new-password">
+                                @if ($errors->has('password'))
+                                    <span class="help-block">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
 
                             @can('editRoles', $dataTypeContent)
